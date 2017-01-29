@@ -101,4 +101,8 @@ public class MyLinkedListTest {
 		assertEquals(1, chickens.size());
 		assertEquals(chickens.remove(0), DELILAH);
 	}
+	public static void main(String[] args){
+		System.out.println("PleaseWork")
+	}
+
 }
