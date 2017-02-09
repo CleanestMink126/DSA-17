@@ -1,15 +1,15 @@
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
 	private Node head;
 	private Node tail;
 	private int size;
 
 	private class Node {
-		Chicken val;
+		T val;
 		Node prev;
 		Node next;
 
-		private Node(Chicken d, Node prev, Node next) {
+		private Node(T d, Node prev, Node next) {
 			this.val = d;
 			this.prev = prev;
 			this.next = next;
@@ -30,16 +30,16 @@ public class MyLinkedList {
 		return size == 0;
 	}
 
-	public void add(Chicken c) {
+	public void add(T c) {
 		addLast(c);
 	}
 
-	public Chicken pop() {
+	public T pop() {
 		return removeLast();
 	}
 
-	public void addLast(Chicken e) {
-		Node c = new Node(e,null,null)
+	public void addLast(T e) {
+		Node c = new Node(e,null,null);
 		if(size ==0){
 			head = c;
 			tail = c;
@@ -51,8 +51,8 @@ public class MyLinkedList {
 		size++;
 	}
 
-	public void addFirst(Chicken e) {
-		Node c = new Node(e,null,null)
+	public void addFirst(T e) {
+		Node c = new Node(e,null,null);
 		if(size ==0){
 			head = c;
 			tail = c;
@@ -64,7 +64,7 @@ public class MyLinkedList {
 		size++;
 	}
 
-	public Chicken get(int index) {
+	public T get(int index) {
 		if (index < size && index>=0){
 			Node ex = head;
 			for(int i = 0; i <index;i++){
@@ -76,7 +76,7 @@ public class MyLinkedList {
 		}
 	}
 
-	public Chicken remove(int index) {
+	public T remove(int index) {
 
 		if(size > 0) {
 			if (index == size - 1) {
@@ -97,11 +97,18 @@ public class MyLinkedList {
 				return null;
 			}
 		}
+		return null;
 	}
 
-	public Chicken removeFirst() {
-		if(size <=0){
+	public T removeFirst() {
+		if (size <= 0) {
 			return null;
+		}else if(size == 1){
+			Node ex = head;
+			head = null;
+			tail = null;
+			size--;
+			return ex.val;
 		}else{
 			head.next.prev = null;
 			Node ex = head;
@@ -111,9 +118,15 @@ public class MyLinkedList {
 		}
 	}
 
-	public Chicken removeLast() {
+	public T removeLast() {
 		if(size <=0){
 			return null;
+		}else if(size == 1){
+			Node ex = head;
+			head = null;
+			tail = null;
+			size--;
+			return ex.val;
 		}else{
 			Node ex = tail;
 			ex.prev.next = null;
