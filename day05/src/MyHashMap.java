@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -23,7 +24,8 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
 	// list of maps
 	protected List<MyLinearMap<K,V>> maps;
-	private int size = 0;
+
+	private int numEntries = 0;
 
 	public MyHashMap() {
 		makeMaps(MIN_MAPS);
@@ -31,7 +33,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
 	@Override
 	public int size() {
-		return size;
+		return numEntries;
 	}
 
 	@Override
@@ -43,28 +45,46 @@ public class MyHashMap<K, V> implements Map<K, V> {
 	 * Initialize maps
 	 */
 	protected void makeMaps(int size) {
-		// TODO: Implement this method
+		maps = new ArrayList<MyLinearMap<K,V>>(size);
+		for(int i = 0;i < size; i++){
+			maps.add( new MyLinearMap<K, V> ());
+		}
+
+		this.numEntries = 0;
 	}
 
 	protected MyLinearMap<K, V> chooseMap(Object key) {
-		// TODO: Implement this method
-		return null;
+
+
+		return maps.get(Objects.hashCode(key) % maps.size());
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
-		// TODO
-		return false;
+		return chooseMap(key).containsKey(key);
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		// TODO
+		for(MyLinearMap<K, V> i : maps){
+			if(i.containsValue(value)){
+				return true;
+			}
+		}
 		return false;
 	}
 
 	protected void rehash(double growthFactor) {
-		// TODO: Implement this method
+		ArrayList<MyLinearMap<K,V>> maps2 = new ArrayList<MyLinearMap<K,V>>((int)(maps.size() * growthFactor));
+		for(int i = 0;i < (int)(maps.size()*growthFactor); i++){
+			maps2.add( new MyLinearMap<K, V> ());
+		}
+		for(MyLinearMap<K, V> i : maps){
+			for(Entry myEntry : i.getEntries()){
+				maps2.get(Objects.hashCode(myEntry.getKey()) % maps2.size()).put((K)myEntry.getKey(), (V)myEntry.getValue());
+			}
+		}
+		maps = maps2;
 	}
 
 	@Override
@@ -75,14 +95,31 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		// TODO
-		return null;
+		if(numEntries/maps.size() >= ALPHA){
+			rehash(GROWTH_FACTOR);
+		}
+		numEntries -= chooseMap(key).size();
+		V back = chooseMap(key).put(key,value);
+		numEntries += chooseMap(key).size();
+
+		return back;
 	}
 
 	@Override
 	public V remove(Object key) {
-		// TODO
-		return null;
+		if((double)(numEntries)/maps.size() < BETA){
+			System.out.println(numEntries/maps.size());
+			rehash(SHRINK_FACTOR);
+		}
+		if(this.containsKey(key)){
+
+			V back = chooseMap(key).remove(key);
+			numEntries--;
+			return back;
+		}else{
+			return null;
+		}
+
 	}
 
 	@Override
@@ -96,7 +133,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
 		for (int i=0; i<maps.size(); i++) {
 			maps.get(i).clear();
 		}
-		size = 0;
+		numEntries = 0;
 	}
 
 	@Override

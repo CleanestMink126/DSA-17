@@ -22,7 +22,7 @@ public class MyHashMapTest {
      */
     @Before
     public void setUp() throws Exception {
-        map = new MyHashMap<>();
+        map = new MyHashMap<String,Integer>();
         map.put("One", 1);
         map.put("Two", 2);
         map.put("Three", 3);
@@ -114,7 +114,7 @@ public class MyHashMapTest {
         MyHashMap temp = (MyHashMap) map;
         assertThat(temp.maps.size(), is(16384));
         for (int i = 0; i < 6000; i++)
-            map.remove(Integer.toString(i));
+            temp.remove(Integer.toString(i));
         assertThat(temp.maps.size(), is(8192));
         for (int i = 6000; i < 9960; i++)
             map.remove(Integer.toString(i));
