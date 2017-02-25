@@ -127,7 +127,7 @@ public class PeakFindingTest {
     @Test
     public void TwoDTest6() {
         Random gen = new Random(1);
-        int[][] nums = new int[90][110];
+        int[][] nums = new int[90][100];
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < nums[0].length; j++) {
                 nums[i][j] = gen.nextInt() % 1000;
