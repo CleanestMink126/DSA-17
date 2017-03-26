@@ -31,4 +31,4 @@ The level-order traversal for a binary tree is the node in order from top to bot
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Binary_tree.svg/192px-Binary_tree.svg.png)
 
-The level order traversal is `[2, 7, 5, 2, 6, 9, 5, 11, 4]`. In `LevelOrderTraversal.java`, write a function that, given a `TreeNode` at the root of a binary tree, returns the level order traversal.
+The level order  traversal is `[2, 7, 5, 2, 6, 9, 5, 11, 4]`. In `LevelOrderTraversal.java`, write a function that, given a `TreeNode` at the root of a binary tree, returns the level order traversal.
