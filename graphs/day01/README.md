@@ -2,7 +2,9 @@
 
 ## `Digraph` and `UndirectedGraph` implementation
 
-For this homework, we provide you with an implementation of a directed graph, as well as an undirected graph. You'll notice that `UndirectedGraph` extends `Digraph`. This is because you can think of an undirected graph as being a directed graph, where each edge is represented by two edges, one in each direction. Its functionality is the same as the one you implemented last homework.
+For this homework, we provide you with an implementation of a directed graph, as well as an undirected graph. You'll notice that `UndirectedGraph` extends `Digraph`.
+his is because you can think of an undirected graph as being a directed graph, where each edge is represented by two edges, one in each direction.
+Its functionality is the same as the one you implemented last homework.
 
 ## Problems
 
