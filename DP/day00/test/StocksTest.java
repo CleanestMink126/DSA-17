@@ -40,7 +40,7 @@ public class StocksTest {
     /**
      * Test method for {@link Stocks#maxProfitWithK(int[], int)}}.
      */
-    @Test
+//    @Test
     public void testMaxProfitWithK() throws FileNotFoundException {
         for(int i = 1; i <= 9; i++){
             Scanner input = new Scanner(new File(
