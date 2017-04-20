@@ -23,7 +23,11 @@ public class DungeonTest {
         int[][] map = {{-8,-15,-9,5,-6},{-10,-13,-4,-1,-4},{-14,4,-5,-9,-3},{-7,-10,-7,-12,-3},{-2,1,-3,5,-9}};
         assertThat(DungeonGame.minInitialHealth(map), is(44));
     }
-    
-    // TODO: Add more test cases here
+
+    @Test
+    public void testMinInitialHealth4() {
+        int[][] map = {{0, -30, 100}, {10, -30, 1000}, {10, -30, 0}};
+        assertThat(DungeonGame.minInitialHealth(map), is(11));
+    }
 
 }
