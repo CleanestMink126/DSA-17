@@ -9,6 +9,11 @@ public class DungeonGame {
                 checked[i][j] = -1;
             }
         }
+        for (int i = checked.length; i >= 0; i--) {
+            for (int j = checked[0].length; j >= 0; j--) {
+                roomPath(map,i,j,checked);
+            }
+        }
         return (roomPath(map,0,0,checked) * -1 + 1);
     }
     public static int roomPath(int[][] map, int x, int y, int[][] checked){
