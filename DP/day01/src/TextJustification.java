@@ -9,27 +9,30 @@ public class TextJustification {
         ArrayList<Integer> ans = recurseT(w,0,new HashMap<Integer, ArrayList<Integer>>(),m);
         ans.remove(0);
         Collections.reverse(ans);
+        System.out.println(ans);
         return ans;
     }
     public static ArrayList<Integer> recurseT(String[] w, int place,HashMap<Integer, ArrayList<Integer>> myMap, int m){
         if(myMap.containsKey(place)){
             return myMap.get(place);
         }
-        if(place >= w.length - 1){
+        if(place >= w.length){
             ArrayList<Integer> pc = new ArrayList<>();
+
             pc.add(0);
-            pc.add(place);
+//            pc.add(place);
 //            myMap.put(place, pc);
             return pc;
         }
-        ArrayList<Integer> min = (ArrayList<Integer>) recurseT(w,place + 1,myMap,m).clone();
-        int minInt = cost(w,place,place + 1,m) + min.get(0);
+        ArrayList<Integer> min = recurseT(w,place+1,myMap,m);
+//        int minInt = cost(w,place,place + 1,m) + min.get(0);
+        int minInt = Integer.MAX_VALUE;
 //        System.out.println(place);
 //        System.out.println(place +1);
 //        System.out.println(min.get(0));
 //        System.out.println(cost(w,place,place+1,m));
 //        System.out.println("-----");
-        for(int i = place + 2; i < Integer.min(place + m, w.length); i++){
+        for(int i = place + 1; i <= w.length; i++){
             ArrayList<Integer> current = recurseT(w,i,myMap,m);
             int cCost = cost(w,place,i,m) + current.get(0);
             if(cCost >-1 && cCost < minInt){
@@ -43,6 +46,9 @@ public class TextJustification {
 //            System.out.println(current.get(0));
 //            System.out.println(cost(w,place,i,m));
 //            System.out.println("-----");
+        }
+        if(min == null){
+            System.out.println("WE DONE FUCKED UP");
         }
 //        System.out.println(place);
 //        for(int i = 0; i < min.size();i++){
